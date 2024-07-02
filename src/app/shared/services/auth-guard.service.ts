@@ -27,12 +27,12 @@ export class AuthGuardService {
       this.router.navigate(['auth/login']);
       return false;
     }
-    else {
-      if (!this.checkAuthorizedRoute(state.url)) {
-        this.router.navigate(['auth/access-denied']);
-        this.messageService.add({ key: 'globalMessage', severity: 'info', summary: "Access deined.", detail: "You don't have permission." });
-      }
-    }
+    // else {
+    //   if (!this.checkAuthorizedRoute(state.url)) {
+    //     this.router.navigate(['auth/access-denied']);
+    //     this.messageService.add({ key: 'globalMessage', severity: 'info', summary: "Access deined.", detail: "You don't have permission." });
+    //   }
+    // }
     return true;
   }
 
