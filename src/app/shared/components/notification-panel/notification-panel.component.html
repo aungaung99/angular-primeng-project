@@ -1,0 +1,18 @@
+<div class="flex flex-column">
+  <div class="border-bottom-1 border-gray-100 py-3 flex flex-column"
+       *ngFor="let notification of notifications"
+       (click)="onRead(notification)">
+    <div class="flex justify-content-between align-items-center">
+      <div class="flex flex-column gap-1">
+        <span class="text-md font-bold">{{notification.title}}</span>
+        <span class="text-md mb-0">{{notification.body}}</span>
+        <span class="text-sm text-gray-700">{{ getDiffDate(notification.date,currentDate) }}</span>
+      </div>
+      <div>
+        <div class=" border border-circle" style="width:10px;height:10px" [ngClass]="[notification.read ? 'bg-white' : 'bg-blue-500']"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--[ngClass]="[notification.read ? 'bg-gray-50' : 'bg-blue-50' ]"-->

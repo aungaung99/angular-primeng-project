@@ -1,0 +1,19 @@
+<div class="layout-wrapper" [ngClass]="containerClass">
+  <app-topbar (searchClick)="showSearchBox()"></app-topbar>
+  <div class="layout-sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="layout-main-container">
+    <div class="layout-main">
+      <!-- #region Search Dialog -->
+
+      <!-- <app-search-dialog></app-search-dialog> -->
+
+      <!-- #endregion -->
+      <router-outlet></router-outlet>
+    </div>
+    <!--<app-footer></app-footer>-->
+  </div>
+  <!--<app-config></app-config>-->
+  <div class="layout-mask"></div>
+</div>

@@ -39,9 +39,19 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/themes/aura-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeflex/primeflex.scss",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/leaflet/dist/leaflet.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/quill/dist/quill.js",
+              "node_modules/leaflet/dist/leaflet.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -110,5 +120,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "b7abe58a-416d-4473-9a37-ceb19360650b"
   }
 }

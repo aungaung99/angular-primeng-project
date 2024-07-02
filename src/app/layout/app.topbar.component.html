@@ -1,0 +1,91 @@
+
+<div class="layout-topbar">
+
+  <a class="layout-topbar-logo" routerLink="/dashboard">
+    <img src="images/es-logo-removebg-preview-resize.png" alt="logo" [style]="{'object-fit':'contain', 'width':'70px' }">
+    <i class="pi pi-bolt text-2xl mr-1"></i>
+    <span>HR</span>
+  </a>
+
+  <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+    <i class="pi pi-bars"></i>
+  </button>
+
+  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+
+  <div class="layout-topbar-menu ml-0">
+    <app-bread-crumb></app-bread-crumb>
+  </div>
+
+  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+    <p-menu #menu [model]="items" [popup]="true">
+      <ng-template pTemplate="start">
+        <button pRipple class="relative overflow-hidden w-full p-link flex align-items-center p-2 pl-3 text-color hover:surface-200 border-noround">
+          <span class="inline-flex flex-column gap-1">
+            <span class="font-bold">{{ fullName }}</span>
+            <span class="text-sm">{{ roleName }}</span>
+          </span>
+        </button>
+      </ng-template>
+      <ng-template pTemplate="item" let-item>
+        <a pRipple class="flex align-items-center p-menuitem-link" [routerLink]="item.routerLink" (click)="menuClick(item.label)">
+          <span [class]="item.icon"></span>
+          <span class="ml-2">{{ item.label }}</span>
+          <p-badge *ngIf="item.badge" class="ml-auto" [value]="item.badge" />
+          <span *ngIf="item.shortcut" class="ml-auto border-1 surface-border border-round surface-100 text-xs p-1">{{ item.shortcut }}</span>
+        </a>
+      </ng-template>
+    </p-menu>
+    <button class="p-link layout-topbar-button" (click)="menu.toggle($event)">
+      <div class="flex justify-content-between align-items-center">
+        <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" class="mr-2" shape="circle" size="large" />
+        <div class="px-2 lg:hidden block gap-3">
+          <span class="inline-flex flex-column gap-1">
+            <span class="font-bold">{{ fullName }}</span>
+            <span class="text-sm">{{ roleName }}</span>
+          </span>
+        </div>
+      </div>
+    </button>
+
+    <button class="p-link layout-topbar-button" (click)="onSearch()">
+      <i class="pi pi-search"></i>
+      <span>Search</span>
+    </button>
+    <button class="p-link layout-topbar-button" (click)="onNotification()">
+      <i class="pi pi-bell" pBadge value="{{notiUnreadCount}}"></i>
+      <span>Notifications</span>
+    </button>
+    <a class="p-link layout-topbar-button lg:hidden block flex" [routerLink]="['./setting']">
+      <i class="pi pi-cog"></i>
+      <span>Setting</span>
+    </a>
+    <button class="p-link layout-topbar-button hover:bg-red-100 lg:hidden block flex" (click)="onLogout()">
+      <i class="pi pi-power-off text-red-300"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+</div>
+
+<p-confirmDialog #cd key="logoutDialog">
+  <ng-template pTemplate="headless" let-message>
+    <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+      <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+        <i class="pi pi-question text-5xl"></i>
+      </div>
+      <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
+      <p class="mb-0">{{ message.message }}</p>
+      <div class="flex align-items-center gap-2 mt-4">
+        <button pButton label="Logout" (click)="cd.accept()" class="p-button-danger w-8rem"></button>
+        <button pButton label="Cancel" (click)="cd.reject()" class="p-button-outlined w-8rem "></button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmDialog>
+
+<p-sidebar [(visible)]="notiPanelVisible" styleClass="w-30rem" position="right">
+  <ng-template pTemplate="header"><h4 class="text-xl mb-0"><span class="text-lg pi pi-bell"></span> Notifications</h4></ng-template>
+  <!-- <app-notification-panel #notificationPanel [currentDate]="currentDate" (notiRead)="getNotiCount()" (redirectUrlClick)="redirectRoute()"></app-notification-panel> -->
+</p-sidebar>
