@@ -1,0 +1,10 @@
+/* General */
+$scale: 13px; /* main font size */
+$borderRadius: 12px; /* border radius of layout element e.g. card, sidebar */
+$transitionDuration: .2s; /* transition duration of layout elements e.g. sidebar, overlay menus */
+
+:root {
+  --text-primary: #264c96;
+  --bg-primary: #143c8f;
+  --bg-primary-hover: #849cc4;
+}
